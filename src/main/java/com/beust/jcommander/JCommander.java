@@ -129,6 +129,11 @@ public class JCommander {
    * The name of the command after the parsing has run.
    */
   private String m_parsedCommand;
+  
+  /**
+   * Parsed options for command
+   */
+  private Object m_parsedCommandOptions;
 
   /**
    * The name of command or alias as it was passed to the
@@ -698,6 +703,7 @@ public class JCommander {
             	throw new MissingCommandException(Messages.getMsg("ex.missing_command", arg));
             } else if (jc != null){
                 m_parsedCommand = jc.m_programName.m_name;
+                m_parsedCommandOptions = jc.m_objects.get(0);
                 m_parsedAlias = arg; //preserve the original form
     
                 // Found a valid command, ask it to parse the remainder of the arguments.
@@ -1330,6 +1336,10 @@ public class JCommander {
 
   public String getParsedCommand() {
     return m_parsedCommand;
+  }
+  
+  public Object getParsedCommandOptions() {
+      return m_parsedCommandOptions;
   }
 
   /**
